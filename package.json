@@ -1,0 +1,74 @@
+{
+    "name": "my-first-app",
+    "productName": "my-first-app",
+    "version": "1.0.0",
+    "description": "My Electron application description",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "electron-forge start",
+        "package": "electron-forge package",
+        "make": "electron-forge make",
+        "lint": "eslint src"
+    },
+    "keywords": [],
+    "author": "potsidesa",
+    "license": "MIT",
+    "config": {
+        "forge": {
+            "make_targets": {
+                "win32": [
+                    "squirrel"
+                ],
+                "darwin": [
+                    "zip"
+                ],
+                "linux": [
+                    "deb",
+                    "rpm"
+                ]
+            },
+            "electronPackagerConfig": {},
+            "electronWinstallerConfig": {
+                "name": "my_first_app"
+            },
+            "electronInstallerDebian": {},
+            "electronInstallerRedhat": {},
+            "github_repository": {
+                "owner": "",
+                "name": ""
+            },
+            "windowsStoreConfig": {
+                "packageName": "",
+                "name": "myfirstapp"
+            }
+        }
+    },
+    "dependencies": {
+        "ace-css": "^1.1.0",
+        "electron-compile": "^6.4.1",
+        "history": "^4.6.1",
+        "localforage": "^1.5.0",
+        "react": "^15.5.4",
+        "react-dom": "^15.5.4",
+        "react-redux": "^5.0.5",
+        "react-router": "^4.1.1",
+        "react-router-redux": "^5.0.0-alpha.6",
+        "redux": "^3.6.0",
+        "redux-logger": "^3.0.6",
+        "redux-offline": "^2.0.0",
+        "redux-thunk": "^2.2.0"
+    },
+    "devDependencies": {
+        "babel-plugin-transform-async-to-generator": "^6.24.1",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.23.0",
+        "babel-preset-env": "^1.5.2",
+        "babel-preset-react": "^6.24.1",
+        "electron-prebuilt-compile": "1.6.11",
+        "eslint": "^3.19.0",
+        "eslint-config-airbnb": "^15.0.1",
+        "eslint-plugin-import": "^2.3.0",
+        "eslint-plugin-jsx-a11y": "^5.0.3",
+        "eslint-plugin-react": "^7.0.1"
+    }
+}

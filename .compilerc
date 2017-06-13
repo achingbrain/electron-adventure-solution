@@ -1,0 +1,52 @@
+{
+  "env": {
+    "development": {
+      "application/javascript": {
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "electron": 1.6
+              }
+            }
+          ],
+          "react"
+        ],
+        "plugins": [
+          "transform-async-to-generator",
+          "transform-object-rest-spread",
+          "transform-class-properties"
+        ],
+        "sourceMaps": "inline"
+      },
+      "text/less": {
+        "dumpLineNumbers": "comments",
+        "paths": [
+          "./node_modules"
+        ]
+      }
+    },
+    "production": {
+      "application/javascript": {
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "electron": 1.6
+              }
+            }
+          ],
+          "react"
+        ],
+        "plugins": [
+        "transform-async-to-generator",
+        "transform-object-rest-spread",
+        "transform-class-properties"
+        ],
+        "sourceMaps": "none"
+      }
+    }
+  }
+}
