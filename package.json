@@ -46,6 +46,7 @@
     "dependencies": {
         "ace-css": "^1.1.0",
         "electron-compile": "^6.4.1",
+        "electron-machine-id": "^1.0.9",
         "history": "^4.6.1",
         "localforage": "^1.5.0",
         "react": "^15.5.4",
@@ -56,7 +57,8 @@
         "redux": "^3.6.0",
         "redux-logger": "^3.0.6",
         "redux-offline": "^2.0.0",
-        "redux-thunk": "^2.2.0"
+        "redux-thunk": "^2.2.0",
+        "udp-chat-server": "0.0.3"
     },
     "devDependencies": {
         "babel-plugin-transform-async-to-generator": "^6.24.1",

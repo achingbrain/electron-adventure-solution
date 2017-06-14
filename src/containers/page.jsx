@@ -6,13 +6,24 @@ import Settings from '../components/settings'
 import Messages from '../components/messages'
 import Members from '../components/members'
 import Input from '../components/input'
+import { ipcRenderer } from 'electron'
 
 class Page extends React.Component {
-  onMessage = (message) => {
+  static propTypes = {
+    loaded: PropTypes.bool
+  }
 
+  onMessage = (message) => {
+    ipcRenderer.send('message', message)
   }
 
   render () {
+    if (!this.props.loaded) {
+      return (
+        <p>Loading</p>
+      )
+    }
+
     return (
       <div>
         <Nav />
@@ -25,4 +36,15 @@ class Page extends React.Component {
   }
 }
 
-export default Page
+const mapStateToProps = (state) => ({
+  loaded: state.app.loaded
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Page)

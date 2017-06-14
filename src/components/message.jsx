@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 const Message = ({ message, date, sender }) => {
   return (
     <div>
-      message goes here
+      <div>{sender.name}</div>
+      <div>{new Date(date).toString()}</div>
+      <div>{message}</div>
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import messages from './messages'
+import chat from './chat'
 import app from './app'
 
 const rootReducer = combineReducers({
-  messages,
+  chat,
   app
 })
 

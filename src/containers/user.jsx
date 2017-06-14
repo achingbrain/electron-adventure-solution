@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { updateUser, closeSettings } from '../actions/app'
+import { updateUser } from '../actions/app'
 import { connect } from 'react-redux'
+import { ipcRenderer } from 'electron'
 
-class Settings extends React.Component {
+class User extends React.Component {
   static propTypes = {
-    open: PropTypes.bool,
     user: PropTypes.shape({
       name: PropTypes.string.isRequired,
       avatar: PropTypes.string
     })
   }
 
-  constructor(props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
 
     this.state = {
       name: props.user ? props.user.name : '',
@@ -29,26 +29,20 @@ class Settings extends React.Component {
       name: this.state.name,
       avatar: this.state.avatar ? this.state.avatar : undefined
     })
-
-    this.props.closeSettings()
-  }
-
-  onCancel = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-
-    this.props.closeSettings()
   }
 
   render () {
-    if (!this.props.open) {
-      return null
+    if (this.props.user) {
+      // tell the main process we have a user
+      ipcRenderer.send('user', this.props.user)
+
+      return this.props.children
     }
 
     return (
       <div className='modal absolute bg-gray z1 top-0 left-0 right-0 bottom-0'>
         <form onSubmit={this.onSubmit} className='bg-gray p2 rounded ml-auto mr-auto mt2' style={{width: '70vw'}}>
-          <h2 className='h2 mt0'>Settings</h2>
+          <h2 className='h2 mt0'>Hello!</h2>
           <input
             className='input'
             name='name'
@@ -69,7 +63,6 @@ class Settings extends React.Component {
               avatar: event.target.value.trim()
             })} />
           <div className='right-align'>
-            <button className='btn btn-outline mr2' onClick={this.onCancel}>Cancel</button>
             <button className='btn btn-primary'>Save</button>
           </div>
         </form>
@@ -79,14 +72,10 @@ class Settings extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  open: state.app.settingsIsOpen,
   user: state.app.user
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  closeSettings: () => {
-    dispatch(closeSettings())
-  },
   updateUser: (user) => {
     dispatch(updateUser(user))
   }
@@ -95,4 +84,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Settings)
+)(User)

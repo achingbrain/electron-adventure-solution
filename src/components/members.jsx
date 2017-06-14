@@ -1,14 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 class Members extends React.Component {
   static propTypes = {
-    members: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
-      avatar: PropTypes.string
-    }))
+    members: PropTypes.object.isRequired
   }
 
   static defaultProps = {
@@ -19,13 +15,29 @@ class Members extends React.Component {
     return (
       <div>
         <ul>
-          {this.props.members.map(member => (
-            <li>{member.name} {member.status}</li>
-          ))}
+          {
+            Object.keys(this.props.members)
+              .map(key => this.props.members[key])
+              .map(member => (
+                <li key={member.id}>{member.name} {member.status}</li>
+              ))
+          }
         </ul>
       </div>
     )
   }
 }
 
-export default Members
+const mapStateToProps = (state) => ({
+  members: state.chat.members,
+  user: state.app.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Members)

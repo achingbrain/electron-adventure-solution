@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import chat from 'udp-chat-server'
+import { machineIdSync } from 'electron-machine-id';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -54,16 +55,43 @@ app.on('activate', () => {
 
 const send = chat({
   acceptLocalMessages: true,
-  onMessage: ({message, attachments, sender}) => {
-    console.info('Received', message, 'from', sender)
-    mainWindow.webContents.send('message:received', {
-      message: message,
-      sender: sender,
-      attachments: attachments
+  onMessage: ({remote, type, data}) => {
+    mainWindow.webContents.send(type, {
+      remote: remote.address,
+      ...data
     })
   }
 })
 
-ipcMain.on('message:send', (event, data) => {
-  send(data)
+let user = {
+  id: machineIdSync()
+}
+
+ipcMain.on('user', (event, data) => {
+  user.name = data.name
+  user.avatar = data.avatar
+
+  send({
+    type: 'member:details',
+    data: user
+  })
+})
+
+ipcMain.on('status', (event, status) => {
+  user.status = status
+
+  send({
+    type: 'member:details',
+    data: user
+  })
+})
+
+ipcMain.on('message', (event, message) => {
+  send({
+    type: 'message:recieved',
+    data: {
+      message: message,
+      ...user
+    }
+  })
 })
