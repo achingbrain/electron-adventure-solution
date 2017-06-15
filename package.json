@@ -8,7 +8,7 @@
         "start": "electron-forge start",
         "package": "electron-forge package",
         "make": "electron-forge make",
-        "lint": "eslint src"
+        "lint": "standard"
     },
     "keywords": [],
     "author": "potsidesa",
@@ -59,7 +59,7 @@
         "redux-logger": "^3.0.6",
         "redux-offline": "^2.0.0",
         "redux-thunk": "^2.2.0",
-        "udp-chat-server": "0.0.3"
+        "udp-chat-server": "0.0.4"
     },
     "devDependencies": {
         "babel-plugin-transform-async-to-generator": "^6.24.1",
@@ -68,10 +68,6 @@
         "babel-preset-env": "^1.5.2",
         "babel-preset-react": "^6.24.1",
         "electron-prebuilt-compile": "1.6.11",
-        "eslint": "^3.19.0",
-        "eslint-config-airbnb": "^15.0.1",
-        "eslint-plugin-import": "^2.3.0",
-        "eslint-plugin-jsx-a11y": "^5.0.3",
-        "eslint-plugin-react": "^7.0.1"
+        "standard": "^10.0.2"
     }
 }
