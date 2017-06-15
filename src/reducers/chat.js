@@ -33,11 +33,12 @@ export default function chat (state = {}, action) {
         messages: state.messages.concat({
           sender: action.payload.id,
           file: true,
-          path: action.payload.path,
+          url: action.payload.url,
           size: action.payload.size,
           type: action.payload.type,
           date: Date.now(),
-          source: action.payload.source
+          source: action.payload.source,
+          name: action.payload.file
         })
       })
 

@@ -17,8 +17,8 @@ class Page extends React.Component {
     ipcRenderer.send('message', message)
   }
 
-  onSendFile = (path) => {
-    ipcRenderer.send('file', path)
+  onSendFile = (file) => {
+    ipcRenderer.send('file', file)
   }
 
   render () {

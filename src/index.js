@@ -1,10 +1,36 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import chat from 'udp-chat-server'
 import { machineIdSync } from 'electron-machine-id'
+import shortid from 'shortid'
+import http from 'http'
+import fs from 'fs'
+import url from 'url'
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let files = {}
+let port
+
+const server = http.createServer((request, response) => {
+  const query = url.parse(req.url, true).query
+  const file = files[query.file]
+
+  if (!file) {
+    return response.send(404).end()
+  }
+
+  response.writeHead(200, {
+    'Content-Type': file.type,
+    'Content-Length': file.size
+  })
+
+  fileSystem.createReadStream(file.path).pipe(response)
+})
+server.on('clientError', (err, socket) => {
+  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n')
+})
+server.listen()
 
 const createWindow = () => {
   // Create the browser window.
@@ -101,12 +127,20 @@ ipcMain.on('message', (event, message) => {
   })
 })
 
-ipcMain.on('file', (event, file) => {
-  send({
-    type: 'file:recieved',
-    data: {
-      ...file,
-      ...user
-    }
+ipcMain.on('file', (event, files) => {
+  files.forEach(file => {
+    const id = shortid.generate()
+    files[id] = file
+
+    send({
+      type: 'file:recieved',
+      data: {
+        file: file.name,
+        type: file.type,
+        size: file.size,
+        url: `http://localhost:${server.address().port}?file=${id}`,
+        ...user
+      }
+    })
   })
 })

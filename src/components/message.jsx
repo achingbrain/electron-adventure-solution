@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { connect } from 'react-redux'
 
-const Message = ({ message, date, sender, user, source }) => {
+const Message = ({ children, date, sender, user, source }) => {
   const now = Date.now()
   let time
 
@@ -24,7 +24,7 @@ const Message = ({ message, date, sender, user, source }) => {
       </div>
       <div className={`flex-auto ${source ? 'right-align' : 'left-align'}`} style={{order: source ? 0 : 1}}>
         <div className='flex-none muted'>{sender.name} {time}</div>
-        <div>{message}</div>
+        <div>{children}</div>
       </div>
 
     </div>
@@ -32,7 +32,6 @@ const Message = ({ message, date, sender, user, source }) => {
 }
 
 Message.propTypes = {
-  message: PropTypes.string.isRequired,
   date: PropTypes.number.isRequired,
   sender: PropTypes.shape({
     id: PropTypes.string.isRequired,

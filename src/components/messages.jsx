@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import Message from './message'
+import FileMessage from './file-message'
+import TextMessage from './text-message'
 import { connect } from 'react-redux'
 
 class Messages extends React.Component {
@@ -28,11 +30,13 @@ class Messages extends React.Component {
       {
           this.props.messages.map(message => (
             <div key={`${message.sender}-${message.date}`}>
-              <Message
-                message={message.message}
-                sender={this.props.members[message.sender]}
-                date={message.date}
-                source={message.source} />
+              <Message { ...message} sender={this.props.members[message.sender]}>
+                {
+                  message.file ?
+                    <FileMessage { ...message} sender={this.props.members[message.sender]} /> :
+                    <TextMessage { ...message} sender={this.props.members[message.sender]} />
+                }
+              </Message>
             </div>
           ))
         }
