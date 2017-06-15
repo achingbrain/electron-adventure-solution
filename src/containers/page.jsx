@@ -17,6 +17,10 @@ class Page extends React.Component {
     ipcRenderer.send('message', message)
   }
 
+  onSendFile = (path) => {
+    ipcRenderer.send('file', path)
+  }
+
   render () {
     if (!this.props.loaded) {
       return (
@@ -39,7 +43,7 @@ class Page extends React.Component {
               <Messages />
             </div>
             <div className='flex-none bg-pink' style={{height: 44}}>
-              <Input onMessage={this.onMessage} />
+              <Input onMessage={this.onMessage} onSendFile={this.onSendFile} />
             </div>
           </div>
         </div>

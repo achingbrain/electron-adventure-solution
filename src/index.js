@@ -100,3 +100,13 @@ ipcMain.on('message', (event, message) => {
     }
   })
 })
+
+ipcMain.on('file', (event, file) => {
+  send({
+    type: 'file:recieved',
+    data: {
+      ...file,
+      ...user
+    }
+  })
+})

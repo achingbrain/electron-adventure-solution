@@ -16,7 +16,7 @@ const Message = ({ message, date, sender, user, source }) => {
   }
 
   return (
-    <div className={`m1 p1 flex ${source ? 'bg-teal' : 'bg-aqua'}`}>
+    <div className={`m1 p1 flex ${source ? 'bg-fuchsia' : 'bg-aqua'}`}>
       <div className={`flex-none ${source ? 'ml1' : 'mr1'}`} style={{width: 50, order: source ? 1 : 0}}>
         {
           sender.avatar ? <img src={sender.avatar} style={{width: 50, height: 50}} /> : <div className='bg-gray' style={{width: 50, height: 50}} />

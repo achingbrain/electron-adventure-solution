@@ -4,7 +4,8 @@ import { ipcRenderer } from 'electron'
 
 class Input extends React.Component {
   static propTypes = {
-    onMessage: PropTypes.func.isRequired
+    onMessage: PropTypes.func.isRequired,
+    onSendFile: PropTypes.func.isRequired
   }
 
   constructor (props, context) {
@@ -30,6 +31,18 @@ class Input extends React.Component {
     })
   }
 
+  onSendFile = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    this.props.onSendFile(Array.prototype.slice.call(this.fileInput.files).map(file => ({
+      name: file.name,
+      path: file.path,
+      size: file.size,
+      type: file.type
+    })))
+  }
+
   onChange = (event) => {
     this.setState({
       message: event.target.value
@@ -49,8 +62,9 @@ class Input extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.onSubmit}>
-        <input className='h1 bg-yellow maroon' style={{width: '100%'}} type='text' name='message' placeholder='Type your message here' value={this.state.message} onChange={this.onChange} />
+      <form onSubmit={this.onSubmit} className='flex'>
+        <input className='h1 bg-yellow maroon flex-auto' type='text' name='message' placeholder='Type your message here' value={this.state.message} onChange={this.onChange} />
+        <input className='h1 btn bg-lime olive flex-none' style={{width: 150}} type='file' onChange={this.onSendFile} ref={ref => this.fileInput = ref} />
       </form>
     )
   }

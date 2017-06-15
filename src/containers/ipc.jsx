@@ -2,7 +2,7 @@ import React from 'react'
 import { updateUser } from '../actions/app'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
-import { addMessage, addMember } from '../actions/chat'
+import { addMessage, addMember, addFile } from '../actions/chat'
 
 class IPC extends React.Component {
   constructor (props, context) {
@@ -14,6 +14,10 @@ class IPC extends React.Component {
 
     ipcRenderer.on('message:recieved', (event, data) => {
       this.props.addMessage(data)
+    })
+
+    ipcRenderer.on('file:recieved', (event, data) => {
+      this.props.addFile(data)
     })
 
     ipcRenderer.on('id', (event, data) => {
@@ -34,11 +38,14 @@ const mapDispatchToProps = (dispatch) => ({
   updateUser: (user) => {
     dispatch(updateUser(user))
   },
-  addMessage: (remote, message) => {
-    dispatch(addMessage(remote, message))
+  addMessage: (data) => {
+    dispatch(addMessage(data))
   },
-  addMember: (remote, member) => {
-    dispatch(addMember(remote, member))
+  addMember: (data) => {
+    dispatch(addMember(data))
+  },
+  addFile: (data) => {
+    dispatch(addFile(data))
   }
 })
 
