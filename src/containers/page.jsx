@@ -25,12 +25,24 @@ class Page extends React.Component {
     }
 
     return (
-      <div>
-        <Nav />
-        <Members className='' />
-        <Messages className='' />
-        <Input className='' onMessage={this.onMessage} />
+      <div className='flex flex-column' style={{height: '100%'}}>
+        <div className='flex-none'>
+          <Nav />
+        </div>
         <Settings />
+        <div className='flex-auto flex bg-red'>
+          <div className='flex-none overflow-auto bg-blue' style={{width: 200, maxWidth: 200}}>
+            <Members className='' />
+          </div>
+          <div className='flex-auto flex flex-column bg-yellow'>
+            <div className='flex-auto overflow-auto bg-navy'>
+              <Messages />
+            </div>
+            <div className='flex-none bg-pink' style={{height: 44}}>
+              <Input onMessage={this.onMessage} />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

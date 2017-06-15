@@ -4,9 +4,9 @@ import { openSettings } from '../actions/app'
 
 const Nav = ({ openSettings }) => {
   return (
-    <nav className='bg-gray flex'>
-      <h1 className='white flex-auto pl2 m0 h1'>Chat</h1>
-      <span className='flex-none right-align pr2 m0 btn h1' onClick={openSettings}>Settings</span>
+    <nav className='bg-fuchsia flex'>
+      <h1 className='white flex-auto p1 m0 h1'>Chat</h1>
+      <span className='flex-none right-align p1 m0 mt1 btn h1' onClick={openSettings}>Settings</span>
     </nav>
   )
 }

@@ -1,29 +1,44 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
 import Message from './message'
 import { connect } from 'react-redux'
 
-const Messages = ({ messages = [], members = {} }) => {
-  return (
-    <div>
-      <ul>
-        {
-          messages.map(message => (
-            <li key={`${message.sender}-${message.date}`}>
+class Messages extends React.Component {
+  static propTypes = {
+    messages: PropTypes.array
+  }
+
+  componentDidMount() {
+     this.scrollToBottom()
+  }
+
+  componentDidUpdate() {
+     this.scrollToBottom()
+  }
+
+  scrollToBottom = () => {
+    const messagesContainer = ReactDOM.findDOMNode(this.messagesContainer)
+    messagesContainer.parentNode.scrollTop = messagesContainer.scrollHeight
+  }
+
+  render ()  {
+    return (
+      <div ref={ref => this.messagesContainer = ref}>
+      {
+          this.props.messages.map(message => (
+            <div key={`${message.sender}-${message.date}`}>
               <Message
                 message={message.message}
-                sender={members[message.sender]}
-                date={message.date} />
-            </li>
+                sender={this.props.members[message.sender]}
+                date={message.date}
+                source={message.source} />
+            </div>
           ))
         }
-      </ul>
-    </div>
-  )
-}
-
-Messages.propTypes = {
-  messages: PropTypes.array
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => ({

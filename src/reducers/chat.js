@@ -24,7 +24,8 @@ export default function chat (state = {}, action) {
         messages: state.messages.concat({
           sender: action.payload.id,
           message: action.payload.message,
-          date: Date.now()
+          date: Date.now(),
+          source: action.payload.source
         })
       })
 

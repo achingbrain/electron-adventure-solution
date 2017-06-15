@@ -50,22 +50,26 @@ app.on('activate', () => {
   }
 });
 
+let user = {
+  id: machineIdSync()
+}
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
 const send = chat({
   acceptLocalMessages: true,
   onMessage: ({remote, type, data}) => {
+    if (data.id === user.id) {
+      data.source = true
+    }
+
     mainWindow.webContents.send(type, {
       remote: remote.address,
       ...data
     })
   }
 })
-
-let user = {
-  id: machineIdSync()
-}
 
 ipcMain.on('user', (event, data) => {
   user.name = data.name

@@ -14,15 +14,14 @@ class Members extends React.Component {
   render () {
     return (
       <div>
-        <ul>
-          {
-            Object.keys(this.props.members)
-              .map(key => this.props.members[key])
-              .map(member => (
-                <li key={member.id}>{member.name} {member.status}</li>
-              ))
-          }
-        </ul>
+        <h3 className='h1 m0 p1'>Members</h3>
+        {
+          Object.keys(this.props.members)
+            .map(key => this.props.members[key])
+            .map(member => (
+              <div key={member.id} className='p1 m0'>{member.name} {member.status}</div>
+            ))
+        }
       </div>
     )
   }

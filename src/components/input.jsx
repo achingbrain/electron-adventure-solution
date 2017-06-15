@@ -35,13 +35,22 @@ class Input extends React.Component {
       message: event.target.value
     })
 
-    ipcRenderer.send('status', 'TYPING')
+    if (!this.timeout) {
+      ipcRenderer.send('status', 'TYPING')
+    }
+
+    clearTimeout(this.timeout)
+
+    this.timeout = setTimeout(() => {
+      ipcRenderer.send('status', '')
+      this.timeout = null
+    }, 1000)
   }
 
   render () {
     return (
       <form onSubmit={this.onSubmit}>
-        <input type='text' name='message' placeholder='Type your message here' value={this.state.message} onChange={this.onChange} />
+        <input className='h1 bg-yellow maroon' style={{width: '100%'}} type='text' name='message' placeholder='Type your message here' value={this.state.message} onChange={this.onChange} />
       </form>
     )
   }

@@ -46,8 +46,8 @@ class Settings extends React.Component {
     }
 
     return (
-      <div className='modal absolute bg-gray z1 top-0 left-0 right-0 bottom-0'>
-        <form onSubmit={this.onSubmit} className='bg-gray p2 rounded ml-auto mr-auto mt2' style={{width: '70vw'}}>
+      <div className='modal absolute bg-yellow z1 top-0 left-0 right-0 bottom-0'>
+        <form onSubmit={this.onSubmit} className='bg-lime p2 rounded ml-auto mr-auto mt2' style={{width: '70vw'}}>
           <h2 className='h2 mt0'>Settings</h2>
           <input
             className='input'
