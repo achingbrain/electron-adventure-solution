@@ -1,6 +1,7 @@
 export const OPEN_SETTINGS = 'OPEN_SETTINGS'
 export const CLOSE_SETTINGS = 'CLOSE_SETTINGS'
 export const UPDATE_USER = 'UPDATE_USER'
+export const RESET = 'RESET'
 
 export function openSettings () {
   return {
@@ -23,5 +24,12 @@ export function updateUser (details) {
       name: details.name,
       avatar: details.avatar
     }
+  }
+}
+
+export function reset (details) {
+  return {
+    type: RESET,
+    payload: {}
   }
 }

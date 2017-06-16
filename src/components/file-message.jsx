@@ -6,7 +6,7 @@ class FileMessage extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     size: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
+    mimeType: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
   }
 
@@ -16,7 +16,7 @@ class FileMessage extends React.Component {
 
   render () {
     return (
-      <a onClick={this.onClick}>{this.props.name} ({this.props.type})</a>
+      <a href='#' onClick={this.onClick}>{this.props.name} ({this.props.mimeType})</a>
     )
   }
 }

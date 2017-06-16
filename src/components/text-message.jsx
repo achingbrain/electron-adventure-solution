@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TextMessage = ({ message }) => {
+const TextMessage = ({ text }) => {
   return (
-    <div>{message}</div>
+    <div>{text}</div>
   )
 }
 
 TextMessage.propTypes = {
-  message: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired
 }
 
 export default TextMessage

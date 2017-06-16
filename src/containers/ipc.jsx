@@ -8,22 +8,12 @@ class IPC extends React.Component {
   constructor (props, context) {
     super(props, context)
 
-    ipcRenderer.on('member:details', (event, data) => {
+    ipcRenderer.on('user', (event, data) => {
       this.props.addMember(data)
     })
 
-    ipcRenderer.on('message:recieved', (event, data) => {
+    ipcRenderer.on('message', (event, data) => {
       this.props.addMessage(data)
-    })
-
-    ipcRenderer.on('file:recieved', (event, data) => {
-      this.props.addFile(data)
-    })
-
-    ipcRenderer.on('id', (event, data) => {
-      this.props.updateUser({
-        id: data
-      })
     })
   }
 

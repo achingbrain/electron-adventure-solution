@@ -29,10 +29,10 @@ class Messages extends React.Component {
       <div ref={ref => this.messagesContainer = ref}>
       {
           this.props.messages.map(message => (
-            <div key={`${message.sender}-${message.date}`}>
+            <div key={`${message.id}`}>
               <Message { ...message} sender={this.props.members[message.sender]}>
                 {
-                  message.file ?
+                  message.type === 'file' ?
                     <FileMessage { ...message} sender={this.props.members[message.sender]} /> :
                     <TextMessage { ...message} sender={this.props.members[message.sender]} />
                 }

@@ -1,8 +1,12 @@
 import { PERSIST_REHYDRATE } from 'redux-offline/lib/constants'
-import { OPEN_SETTINGS, CLOSE_SETTINGS, UPDATE_USER } from '../actions/app'
+import { OPEN_SETTINGS, CLOSE_SETTINGS, UPDATE_USER, RESET } from '../actions/app'
 
 export default function app (state = {}, action) {
   switch (action.type) {
+    case RESET:
+      return {
+        loaded: true
+      }
     case PERSIST_REHYDRATE:
       return Object.assign({}, state, action.payload.app, {
         loaded: true
