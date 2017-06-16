@@ -8,7 +8,6 @@ import url from 'url'
 
 let mainWindow
 let files = {}
-let port
 
 const server = http.createServer((request, response) => {
   const query = url.parse(request.url, true).query
@@ -130,7 +129,7 @@ ipcMain.on('file', (event, chosenFiles) => {
           name: file.name,
           mimeType: file.type,
           size: file.size,
-          url: `http://localhost:${server.address().port}?file=${id}`,
+          url: `http://localhost:${server.address().port}?file=${id}`
         },
         sender: user
       }

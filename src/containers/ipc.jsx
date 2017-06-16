@@ -1,8 +1,7 @@
 import React from 'react'
-import { updateUser } from '../actions/app'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
-import { addMessage, addMember, addFile } from '../actions/chat'
+import { addMessage, addMember } from '../actions/chat'
 
 class IPC extends React.Component {
   constructor (props, context) {
@@ -25,17 +24,11 @@ class IPC extends React.Component {
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  updateUser: (user) => {
-    dispatch(updateUser(user))
-  },
   addMessage: (data) => {
     dispatch(addMessage(data))
   },
   addMember: (data) => {
     dispatch(addMember(data))
-  },
-  addFile: (data) => {
-    dispatch(addFile(data))
   }
 })
 

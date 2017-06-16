@@ -1,6 +1,6 @@
 import { PERSIST_REHYDRATE } from 'redux-offline/lib/constants'
 import { RESET } from '../actions/app'
-import { ADD_MEMBER, ADD_MESSAGE, ADD_FILE } from '../actions/chat'
+import { ADD_MEMBER, ADD_MESSAGE } from '../actions/chat'
 
 export default function chat (state = {}, action) {
   switch (action.type) {
@@ -15,7 +15,7 @@ export default function chat (state = {}, action) {
         messages: []
       }, action.payload.chat)
     case ADD_MEMBER:
-      const { remote, sender } = action.payload
+      const { sender } = action.payload
       const { id, name, avatar, status } = sender
 
       const members = JSON.parse(JSON.stringify(state.members || {}))
