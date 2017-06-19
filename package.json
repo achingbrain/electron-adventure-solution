@@ -56,7 +56,6 @@
         "redux": "^3.6.0",
         "redux-logger": "^3.0.6",
         "redux-persist": "^4.8.0",
-        "redux-thunk": "^2.2.0",
         "shortid": "^2.2.8",
         "udp-chat-server": "0.0.4"
     },
