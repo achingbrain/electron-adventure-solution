@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import Nav from '../components/nav'
 import Settings from '../components/settings'
 import Messages from '../components/messages'
@@ -9,10 +7,6 @@ import Input from '../components/input'
 import { ipcRenderer } from 'electron'
 
 class Page extends React.Component {
-  static propTypes = {
-    loaded: PropTypes.bool
-  }
-
   onMessage = (message) => {
     ipcRenderer.send('message', message)
   }
@@ -22,12 +16,6 @@ class Page extends React.Component {
   }
 
   render () {
-    if (!this.props.loaded) {
-      return (
-        <p>Loading</p>
-      )
-    }
-
     return (
       <div className='flex flex-column' style={{height: '100%'}}>
         <div className='flex-none'>
@@ -52,15 +40,4 @@ class Page extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loaded: state.app.loaded
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Page)
+export default Page

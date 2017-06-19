@@ -2,15 +2,9 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { routerMiddleware } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
-import { offline } from 'redux-offline'
-import offlineConfig from 'redux-offline/lib/defaults'
-import localforage from 'localforage'
-import history from './history'
+import {persistStore, autoRehydrate} from 'redux-persist'
+import localForage from 'localforage'
 import rootReducer from '../reducers'
-
-offlineConfig.persistOptions = {
-  storage: localforage
-}
 
 const configureStore = (initialState) => {
   // Redux Configuration
@@ -26,11 +20,8 @@ const configureStore = (initialState) => {
     collapsed: true
   }))
 
-  // Router Middleware
-  middleware.push(routerMiddleware(history))
-
   enhancers.push(applyMiddleware(...middleware))
-  enhancers.push(offline(offlineConfig))
+  enhancers.push(autoRehydrate())
 
   // Create Store
   const store = createStore(rootReducer, initialState, compose(...enhancers))
@@ -40,6 +31,9 @@ const configureStore = (initialState) => {
       store.replaceReducer(require('../reducers').default) // eslint-disable-line global-require
     )
   }
+
+  // begin periodically persisting the store
+  persistStore(store, {storage: localForage})
 
   return store
 }

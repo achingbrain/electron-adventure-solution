@@ -1,4 +1,4 @@
-import { PERSIST_REHYDRATE } from 'redux-offline/lib/constants'
+import { REHYDRATE } from 'redux-persist/constants'
 import { RESET } from '../actions/app'
 import { ADD_MEMBER, ADD_MESSAGE } from '../actions/chat'
 
@@ -9,7 +9,7 @@ export default function chat (state = {}, action) {
         members: {},
         messages: []
       }
-    case PERSIST_REHYDRATE:
+    case REHYDRATE:
       return Object.assign({}, state, {
         members: {},
         messages: []
