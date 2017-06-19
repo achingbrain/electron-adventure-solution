@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ipcRenderer } from 'electron'
 
-class Input extends React.Component {
+class MessageInput extends React.Component {
   static propTypes = {
     onMessage: PropTypes.func.isRequired,
     onSendFile: PropTypes.func.isRequired
@@ -63,11 +63,11 @@ class Input extends React.Component {
   render () {
     return (
       <form onSubmit={this.onSubmit} className='flex'>
-        <input className='h1 bg-yellow maroon flex-auto' type='text' name='message' placeholder='Type your message here' value={this.state.message} onChange={this.onChange} />
+        <input className='h1 bg-yellow maroon flex-auto' type='text' name='message' placeholder='Type your message here' value={this.state.message} onChange={this.onChange} data-id='text-message-input' />
         <input className='h1 btn bg-lime olive flex-none' style={{width: 150}} type='file' onChange={this.onSendFile} ref={ref => this.fileInput = ref} />
       </form>
     )
   }
 }
 
-export default Input
+export default MessageInput

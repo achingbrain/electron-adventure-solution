@@ -3,7 +3,7 @@ import Nav from '../components/nav'
 import Settings from '../components/settings'
 import Messages from '../components/messages'
 import Members from '../components/members'
-import Input from '../components/input'
+import MessageInput from '../components/message-input'
 import { ipcRenderer } from 'electron'
 
 class Page extends React.Component {
@@ -31,7 +31,7 @@ class Page extends React.Component {
               <Messages />
             </div>
             <div className='flex-none bg-pink' style={{height: 44}}>
-              <Input onMessage={this.onMessage} onSendFile={this.onSendFile} />
+              <MessageInput onMessage={this.onMessage} onSendFile={this.onSendFile} />
             </div>
           </div>
         </div>

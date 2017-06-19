@@ -25,9 +25,16 @@ class User extends React.Component {
     event.preventDefault()
     event.stopPropagation()
 
+    const name = this.state.name.trim()
+    const avatar = this.state.avatar.trim()
+
+    if (!name) {
+      return
+    }
+
     this.props.updateUser({
-      name: this.state.name,
-      avatar: this.state.avatar ? this.state.avatar : undefined
+      name: name,
+      avatar: avatar || undefined
     })
   }
 
@@ -40,7 +47,7 @@ class User extends React.Component {
     }
 
     return (
-      <div className='modal absolute bg-gray z1 top-0 left-0 right-0 bottom-0'>
+      <div className='modal absolute bg-gray z1 top-0 left-0 right-0 bottom-0' data-id='user-input-form'>
         <form onSubmit={this.onSubmit} className='bg-gray p2 rounded ml-auto mr-auto mt2' style={{width: '70vw'}}>
           <h2 className='h2 mt0'>Hello!</h2>
           <input
@@ -50,8 +57,9 @@ class User extends React.Component {
             placeholder='Name'
             value={this.state.name}
             onChange={event => this.setState({
-              name: event.target.value.trim()
+              name: event.target.value
             })}
+            data-id='initial-username-input'
             required />
           <input
             className='input'
@@ -60,10 +68,12 @@ class User extends React.Component {
             placeholder='Avatar image url'
             value={this.state.avatar}
             onChange={event => this.setState({
-              avatar: event.target.value.trim()
-            })} />
+              avatar: event.target.value
+            })}
+           data-id='initial-avatar-input'
+          />
           <div className='right-align'>
-            <button className='btn btn-primary'>Save</button>
+            <button className='btn btn-primary' data-id='initial-save-button'>Save</button>
           </div>
         </form>
       </div>

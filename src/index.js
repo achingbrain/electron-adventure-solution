@@ -34,16 +34,22 @@ server.listen()
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    show: false
   })
 
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
-
-  mainWindow.webContents.openDevTools()
-
+  // prevents memory leaks
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  // hides the main window until all resources are loaded
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  })
+
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.webContents.openDevTools()
 }
 
 app.on('ready', createWindow)
@@ -65,16 +71,12 @@ let user = {
 }
 
 const send = chat({
-  acceptLocalMessages: true,
-  onMessage: ({remote, type, data}) => {
+  onMessage: ({type, data}) => {
     if (data.sender.id === user.id) {
       data.source = true
     }
 
-    mainWindow.webContents.send(type, {
-      remote: remote.address,
-      ...data
-    })
+    mainWindow.webContents.send(type, data)
   }
 })
 
