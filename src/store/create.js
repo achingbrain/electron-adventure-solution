@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { routerMiddleware } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
 import {persistStore, autoRehydrate} from 'redux-persist'
 import localForage from 'localforage'
