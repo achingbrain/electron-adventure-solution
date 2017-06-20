@@ -129,7 +129,7 @@ ipcMain.on('file', (event, chosenFiles) => {
           id: shortid.generate(),
           type: 'file',
           name: file.name,
-          mimeType: file.type,
+          mimeType: file.mimeType,
           size: file.size,
           url: `http://localhost:${server.address().port}?file=${id}`
         },

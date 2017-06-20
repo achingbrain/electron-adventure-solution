@@ -26,8 +26,8 @@ export default function app (state = {}, action) {
     case UPDATE_USER:
       state = Object.assign({}, state, {
         user: {
-          name: action.payload.name,
-          avatar: action.payload.avatar
+          name: action.payload ? action.payload.name : null,
+          avatar: action.payload ? action.payload.avatar : null
         }
       })
       return state

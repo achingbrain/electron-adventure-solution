@@ -39,7 +39,7 @@ class MessageInput extends React.Component {
       name: file.name,
       path: file.path,
       size: file.size,
-      type: file.type
+      mimeType: file.type
     })))
   }
 

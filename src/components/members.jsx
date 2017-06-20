@@ -19,7 +19,7 @@ class Members extends React.Component {
           Object.keys(this.props.members)
             .map(key => this.props.members[key])
             .map(member => (
-              <div key={member.id} className='p1 m0'>{member.name} {member.status}</div>
+              <div key={member.id} className='p1 m0' data-member-id={member.id} data-status={member.status}>{member.name} {member.status}</div>
             ))
         }
       </div>

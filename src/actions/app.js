@@ -29,7 +29,6 @@ export function updateUser (details) {
 
 export function reset (details) {
   return {
-    type: RESET,
-    payload: {}
+    type: RESET
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { connect } from 'react-redux'
 
-const Message = ({ children, date, sender, user, source }) => {
+const Message = ({ children, date, sender, user, source, id }) => {
   const now = Date.now()
   let time
 
@@ -16,10 +16,10 @@ const Message = ({ children, date, sender, user, source }) => {
   }
 
   return (
-    <div className={`m1 p1 flex ${source ? 'bg-fuchsia' : 'bg-aqua'}`}>
+    <div className={`m1 p1 flex ${source ? 'bg-fuchsia' : 'bg-aqua'}`} data-type='message' data-source={source} data-message-id={id}>
       <div className={`flex-none ${source ? 'ml1' : 'mr1'}`} style={{width: 50, order: source ? 1 : 0}}>
         {
-          sender.avatar ? <img src={sender.avatar} style={{width: 50, height: 50}} /> : <div className='bg-gray' style={{width: 50, height: 50}} />
+          (sender && sender.avatar) ? <img src={sender.avatar} style={{width: 50, height: 50}} /> : <div className='bg-gray' style={{width: 50, height: 50}} />
         }
       </div>
       <div className={`flex-auto ${source ? 'right-align' : 'left-align'}`} style={{order: source ? 0 : 1}}>
@@ -32,6 +32,7 @@ const Message = ({ children, date, sender, user, source }) => {
 }
 
 Message.propTypes = {
+  id: PropTypes.string.isRequired,
   date: PropTypes.number.isRequired,
   sender: PropTypes.shape({
     id: PropTypes.string.isRequired,
