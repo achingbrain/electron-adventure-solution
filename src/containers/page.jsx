@@ -12,7 +12,7 @@ class Page extends React.Component {
   }
 
   onSendFile = (file) => {
-    ipcRenderer.send('file', file)
+
   }
 
   render () {
