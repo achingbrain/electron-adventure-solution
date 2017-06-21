@@ -32,15 +32,7 @@ class MessageInput extends React.Component {
   }
 
   onSendFile = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
 
-    this.props.onSendFile(Array.prototype.slice.call(this.fileInput.files).map(file => ({
-      name: file.name,
-      path: file.path,
-      size: file.size,
-      mimeType: file.type
-    })))
   }
 
   onChange = (event) => {
@@ -64,7 +56,6 @@ class MessageInput extends React.Component {
     return (
       <form onSubmit={this.onSubmit} className='flex'>
         <input className='h1 bg-yellow maroon flex-auto' type='text' name='message' placeholder='Type your message here' value={this.state.message} onChange={this.onChange} data-id='text-message-input' />
-        <input className='h1 btn bg-lime olive flex-none' style={{width: 150}} type='file' onChange={this.onSendFile} ref={ref => this.fileInput = ref} />
       </form>
     )
   }
