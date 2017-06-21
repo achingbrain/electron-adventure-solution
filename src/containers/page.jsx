@@ -4,15 +4,14 @@ import Settings from '../components/settings'
 import Messages from '../components/messages'
 import Members from '../components/members'
 import MessageInput from '../components/message-input'
-import { ipcRenderer } from 'electron'
 
 class Page extends React.Component {
   onMessage = (message) => {
-    ipcRenderer.send('message', message)
+
   }
 
   onSendFile = (file) => {
-    ipcRenderer.send('file', file)
+
   }
 
   render () {
